@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Timer2</title>
+  <style>
+    .countdownDisplay {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div>
+    <div class="countdownDisplay">00:00:00</div>
+    <div>
+      <input type="number" class="timeInput hoursInput" placeholder="Hours" min="0" max="99">
+      <input type="number" class="timeInput minutesInput" placeholder="Minutes" min="0" max="59">
+      <input type="number" class="timeInput secondsInput" placeholder="Seconds" min="0" max="59">
+    </div>
+    <div class="buttonDiv">
+      <button class="startTimer">Start Timer</button>
+      <button onclick="resetTimer()" class="resetTimer">Reset Timer</button>
+    </div>
+  </div>
+
+  <script>
+    var countdownDisplay = document.querySelector(".countdownDisplay");
+    var countdown;
+    var initialHours = '00';
+    var initialMinutes = '00';
+    var initialSeconds = '00';
+    var remainingTime = 0;
+
+    function startTimer() {
+      var hours = parseInt(document.querySelector(".hoursInput").value);
+      var minutes = parseInt(document.querySelector(".minutesInput").value);
+      var seconds = parseInt(document.querySelector(".secondsInput").value);
+
+      var totalTimeInSeconds = (hours * 3600) + (minutes * 60) + seconds;
+
+      countdown = setInterval(function() {
+        var remainingHours = Math.floor(totalTimeInSeconds / 3600);
+        var remainingMinutes = Math.floor((totalTimeInSeconds % 3600) / 60);
+        var remainingSeconds = totalTimeInSeconds % 60;
+
+        countdownDisplay.textContent = remainingHours + ":" + remainingMinutes + ":" + remainingSeconds;
+
+        totalTimeInSeconds--;
+
+        if (totalTimeInSeconds < 0) {
+          clearInterval(countdown);
+          countdownDisplay.textContent = "Countdown finished!";
+        }
+
+      }, 1000);
+    }
+
+    let timerOn = false;
+    const startButton = document.querySelector(".startTimer");
+    startButton.addEventListener('click', () => {
+      if (timerOn === false) {
+        startTimer();
+        startButton.textContent = 'Stop Timer';
+        timerOn = true;
+      } else {
+        clearInterval(countdown);
+        startButton.textContent = 'Start Timer';
+        timerOn = false;
+        remainingTime = (parseInt(document.querySelector(".hoursInput").value) * 3600) +
+                        (parseInt(document.querySelector(".minutesInput").value) * 60) +
+                        parseInt(document.querySelector(".secondsInput").value);
+      }
+    });
+
+    function resetTimer() {
+      clearInterval(countdown);
+      countdownDisplay.textContent = initialHours + ":" + initialMinutes + ":" + initialSeconds || '00:00:00';
+      startButton.textContent = 'Start Timer';
+      timerOn = false;
+      remainingTime = 0;
+    }
+
+    // Save the initial time entered by the user
+    document.querySelectorAll(".timeInput").forEach(function(input) {
+      input.addEventListener('input', function() {
+        if (this.classList.contains("hoursInput")) {
+          initialHours = parseInt(this.value) || '00';
+        } else if (this.classList.contains("minutesInput")) {
+          initialMinutes = parseInt(this.value) || '00';
+        } else if (this.classList.contains("secondsInput")) {
+          initialSeconds = parseInt(this.value) || '00';
+        }
+      });
+    });
+
+    // Set the initial values of the input boxes and remainingTime when the page loads
+    window.addEventListener('load', function() {
+      document.querySelector(".hoursInput").value = initialHours;
+      document.querySelector(".minutesInput").value = initialMinutes;
+      document.querySelector(".secondsInput").value = initialSeconds;
+      remainingTime = (initialHours * 3600) + (initialMinutes * 60) + initialSeconds;
+    });
+
+    // Resume the countdown if there is remaining time
+    window.addEventListener('DOMContentLoaded', function() {
+      if (remainingTime > 0) {
+        startTimer();
+        startButton.textContent = 'Stop Timer';
+        timerOn = true;
+      }
+    });
+  </script>
+</body>
+</html>

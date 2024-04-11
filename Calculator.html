@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculator</title>
+  <style>
+    .button {
+      border-radius: 15px;
+    }
+  </style>
+</head>
+<body>
+  <p>
+  <button onclick="updateCalculator('7')">7</button>
+  <button onclick="updateCalculator('8')">8</button>
+  <button onclick="updateCalculator('9')">9</button>
+  <button onclick="updateCalculator(' + ')">+</button>
+  </p>
+  <p>
+  <button onclick="updateCalculator('4')">4</button>
+  <button onclick="updateCalculator('5')">5</button>
+  <button onclick="updateCalculator('6')">6</button>
+  <button onclick="updateCalculator(' - ')">-</button>
+  </p>
+  <p>
+  <button onclick="updateCalculator('1')">1</button>
+  <button onclick="updateCalculator('2')">2</button>
+  <button onclick="updateCalculator('3')">3</button>
+  <button onclick="updateCalculator(' * ')">*</button>
+  </p>
+  <p>
+  <button onclick="updateCalculator('0')">0</button>
+  <button onclick="updateCalculator(' . ')">.</button>  
+  <button onclick="updateCalculator(' / ')">/</button>
+  <button onclick="calculation = ''; resultDiv.textContent = 0; console.log(0); localStorage.setItem('calculation', calculation);">Clear</button>
+  <button onclick="calcResult()">=</button>
+  <div id="result">0</div>
+  </p>
+  
+
+
+  <script>
+    let calculation = localStorage.getItem('calculation') || '';
+    let resultDiv = document.getElementById('result');
+    result.textContent = localStorage.getItem('calculation') || 0;
+    
+    
+    function calcResult(){
+    // Evaluate the calculation and store the result
+    let result = eval(calculation);
+    /* Clear the calculation and update the result in the div
+    calculation = '';
+    */
+    resultDiv.textContent = result;
+    console.log(result);
+  }
+  function updateCalculator(numberC){
+    calculation += numberC;
+    resultDiv.textContent = calculation;
+    console.log(calculation);
+    
+    localStorage.setItem('calculation', calculation);
+  }
+
+  </script>
+
+</body>
+</html>
+
+
