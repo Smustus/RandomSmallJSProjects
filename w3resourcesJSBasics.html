@@ -4,12 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Play</title>
-  
-  <style>
-
-
-  
-  </style>
 
 </head>
 <body onload="rotate('rotateDiv')">
@@ -71,15 +65,13 @@ console.log(removeItemAll([2,5,9,1,5,8,5], 5))
     const seconds = today.getSeconds();  //get current seconds of the minute
     console.log(seconds);
 
-    let AMPM = '';
-
     // const AMPM = hour < 12 ? 'AM' : 'PM';  //Instead of a function you can make a if hour below 12 = AM, else PM
 
     function AmPm() {
       if (hour < 12){
-        return AMPM = 'AM'
+        return 'AM'
       } else {
-        return AMPM = 'PM'
+        return 'PM'
       }
     }
 
@@ -90,24 +82,26 @@ console.log(removeItemAll([2,5,9,1,5,8,5], 5))
 //Expected Output :
 //mm-dd-yyyy, mm/dd/yyyy or dd-mm-yyyy, dd/mm/yyyy
 
-    const month = today.getMonth();
-    const formattedMonth = month < 10 ? `0${month}` : month.toString();
-    console.log(month);
-    
-    const monthList = ['January','February','March','April','May','June','July','August','September','October','November','December']
-    console.log(monthList[month]);
+    function getCurrentDate(){
+      const month = today.getMonth();
+      const formattedMonth = month < 10 ? `0${month}` : month.toString();
+      console.log(month);
+      
+      const monthList = ['January','February','March','April','May','June','July','August','September','October','November','December']
+      console.log(monthList[month]);
 
-    const date = today.getDate();
-    console.log(date);
-    const formattedDate = date < 10 ? `0${date}` : date;  //addint toString() makes it into a string otherwise its a number
-    
+      const date = today.getDate();
+      console.log(date);
+      const formattedDate = date < 10 ? `0${date}` : date;  //addint toString() makes it into a string otherwise its a number
+      
+      const year = today.getFullYear();
+      console.log(year);
 
-    const year = today.getFullYear();
-    console.log(year);
+      const currentDate = `${formattedMonth}-${formattedDate}-${year}`
 
-   // let currentDate = `${year}-${formattedMonth}-${formattedDate}`;  //Returns a string and store it in currentDate variable
-
-    //console.log(currentDate);
+      console.log(currentDate);
+    }
+    getCurrentDate();
 
 
 //4. Write a JavaScript program to find the area of a triangle where three sides are 5, 6, 7.  
@@ -123,8 +117,6 @@ console.log(removeItemAll([2,5,9,1,5,8,5], 5))
 
 //5. Write a JavaScript program to rotate the string 'w3resource' in the right direction. 
 //This is done by periodically removing one letter from the string end and attaching it to the front.  
-
-    
     
     function rotate(par){
       var rotate = document.getElementById(par);
@@ -170,7 +162,7 @@ console.log(removeItemAll([2,5,9,1,5,8,5], 5))
 //----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 //7. Write a JavaScript program to find out if 1st January will be a Sunday between 2014 and 2050.  
-  for (years = 2014; years <= 2050; years++){
+  for (let years = 2014; years <= 2050; years++){
     if (new Date(years, 0, 1).getDay() === 0){
       console.log("1st January is being a Sunday  "+years);
     }
@@ -1117,7 +1109,7 @@ function numbersx(nr1, nr2){
 
   function createCopies(string, repeats){
     let count = 0;
-    let = stringAcc = '';
+    let stringAcc = '';
     while(count < repeats){
       stringAcc += string
       count++;
@@ -1150,7 +1142,7 @@ function numbersx(nr1, nr2){
 
   function newstring(str){
   if (str.length >= 3) {
-    result_str = str.substring(str.length - 3);
+    const result_str = str.substring(str.length - 3);
     return result_str.repeat(3);
   }
   else return false;
@@ -1497,7 +1489,7 @@ console.log(removeChar('Normal')); //Normal
     stringArray.map((value) => {     //iterera igenom array med map och utför callback på varje value
       max = Math.max(max, value.length)}); //varje value.length jämförs mot nuvarande max och Math.max return det högsta utav dessa
       
-      result = stringArray.filter((value) => { //filtrera genom array, lagra i variabel för att enkelt return
+      const result = stringArray.filter((value) => { //filtrera genom array, lagra i variabel för att enkelt return
         return value.length == max    // return det värdet som motsvarar värdet på max i tidigare map, 11 == 11, Elderberry uppfyller true och blir return
       });
       return result;
@@ -1773,7 +1765,7 @@ console.log(alphabet_char_Shift("bGdkkn")) //Hello
   */
 
   function replaceNums(array, num){
-    replacedArray = [];
+    const replacedArray = [];
     for(const element of array){
       replacedArray.push(num);
     }
@@ -2005,50 +1997,6 @@ if (canRearrangeToMatch(string1, string2)) {
   console.log(checkLatin('DoAjE')); //True
   console.log(checkLatin('DoAjeE')); //False
   console.log(checkLatin('DoAj324eE')); //False
-  
-  function test_string(input_str) {
-    const is_lower_case = symbol => {   //Create a variable with a stored function to return true if a element(symbol) is 
-      if ('a' <= symbol && symbol <= 'z') {
-        return true;
-      }
-      return false;
-    };
-
-    const is_upper_case = symbol => {
-      if ('A' <= symbol && symbol <= 'Z') {
-        return true;
-      }
-      return false;
-    };
-
-    const is_first_char_lower = is_lower_case(input_str[0]);
-    const is_first_char_upper = is_upper_case(input_str[0]);
-
-    if (!(is_first_char_lower || is_first_char_upper)) {
-      return false;
-    }
-
-    for (let i = 1; i < input_str.length; i++) {
-      if (i % 2) {
-        if (is_lower_case(input_str[i]) === is_first_char_lower ||
-          is_upper_case(input_str[i]) === is_first_char_upper) {
-          return false;
-        }
-      } else {
-        if (is_lower_case(input_str[i]) !== is_first_char_lower ||
-          is_upper_case(input_str[i]) !== is_first_char_upper) {
-          return false;
-        }
-      }
-    }
-
-    return true;
-  }
-
-  console.log(test_string('DoAjE'));   //True
-  console.log(test_string('DoAjeE')); //False
-  console.log(test_string('DoAj324eE')); //False
-
 
 //102. Write a JavaScript program to find the number of inversions of a given array of integers. 
 //Note: Two elements of the array a stored at positions i and j form an inversion if a[i] > a[j] and i < j.
@@ -2533,37 +2481,6 @@ console.log(findOptions(stringDigitHash));
   console.log(checkPointCircle(6, 3, 5)); //false;
   console.log('--------------------');
 
-  //121. Write a JavaScript program to check whether a given matrix is lower triangular or not. 
-  //Note: A square matrix is called lower triangular if all the entries above the main diagonal are zero.
-
-  const matrix4 = [
-    [1, 0, 0], 
-    [1, 1, 0], 
-    [1, 1, 1]
-  ] //true
-
-  const matrix5 = [
-    [1, 0, 1], 
-    [1, 1, 0], 
-    [1, 1, 1]
-  ] //false
-
-  function checkLowerTriangular(matrix){
-    if(matrix.length !== matrix[0].length){
-      return "Incorrect matrix size";
-    }
-    for(let i = 0; i < matrix.length; i++){
-      for(let j = 0; j < matrix[i].length; j++){
-        if( j > i && matrix[i][j] !== 0){
-          return false;
-        }
-      } return true;
-    }
-  }
-  console.log(checkLowerTriangular(matrix4)); //true
-  console.log(checkLowerTriangular(matrix5)); //false
-  console.log('--------------------');
-
 
   //122. Write a JavaScript program to check whether a given array of integers represents a strictly increasing or decreasing sequence. 
 
@@ -2736,11 +2653,6 @@ console.log(findOptions(stringDigitHash));
 
   //132. Write a JavaScript program to find all distinct prime factors of a given integer.
   //the prime factors of a positive integer are the prime numbers that divide that integer exactly
-  function findDistinctPrimeFactors(){
-    console.log('hej');
-  }
-  console.log(findDistinctPrimeFactors());
-  console.log('--------------------');
 
 
   //133. Write a JavaScript program to check whether a given fraction is proper or not. 
@@ -2830,16 +2742,23 @@ console.log(findOptions(stringDigitHash));
   function checkDigits(num){
     const numArr = [num].toString().split('');
     console.log(numArr);
-    for(let i = 0; i < numArr.length; i++){
-      if(Number(numArr[i]) !== Number(numArr[i + 1])){
+    let correct = 0;
+    for(let i = 1; i < numArr.length; i++){
+      if(Number(numArr[i]) !== Number(numArr[0])){
         return 'No they arent identical'
+      } else {
+        correct++
       }
-      return 'Yes they are identical'
+      if(correct === numArr.length - 1){
+        return 'Yes they are identical'
+      }
+      
     }
-    
   }
-  console.log(checkDigits(1589));
-  console.log(checkDigits(5555));
+  console.log(checkDigits(1589)); //false
+  console.log(checkDigits(5555)); //true
+  console.log(checkDigits(5565)); //false
+  console.log(checkDigits(6555)); //false
   console.log('--------------------'); 
 
 
@@ -3100,85 +3019,6 @@ console.log('--------------------');
   console.log(swapAdjDigits([1, 2, 3, 4])); //[2, 1, 4, 3]
   console.log(swapAdjDigits([1, 2, 3, 4, 5, 6, 7, 8, 9, 10])); //[2, 1, 4, 3, 6, 5, 8, 7, 10, 9]
   console.log('--------------------');
-
-  /* //Combining 2 arrays
-  let arrayXC = ['kebab', 'french fries', 'turkey'];
-  let arrayCX = ['kebab', 'bearnaise', 'charles dickens mother in law'];
-
-  const newCombinedArray = Array.from(new Set(arrayCX.concat(arrayXC)));
-  console.log(newCombinedArray);
-
-  const newCombinedArray2 = Array.from(new Set([...arrayCX, ...arrayXC]))
-  console.log(newCombinedArray2);
-  
-  const newCombinedArray3 = [...new Set([...arrayCX, ...arrayXC])];
-  console.log(newCombinedArray3);
-
-  //Extract from object
-  const objectTest = {
-    age: 27,
-    tweets: 20,
-    todo: ['Carry out the trash', 'Drink vodka', 'Smash gf']
-  };
-
-  const {todo:[x, y, z], age, tweets} = objectTest;
-  console.log(age); //27
-  console.log(tweets); //20
-  console.log(y); //'Drink vodka'
-
-  const user = 'g';
-
-  const getUserData = () => {
-    if (!user) return;
-    
-    const data = [{
-    age: 27,
-    name: 'Hans',
-    todo: ['Carry out the trash', 'Drink vodka', 'Smash gf']
-  }, 
-  {
-    age: 21,
-    name: 'Gobbel',
-    todo: ['Carry out the trash', 'Drink vodka', 'Smash gf']
-  }];
-  console.log(data[1]);
-  }
-  console.log(getUserData());
-
-  const data2 = [{
-    age: 27,
-    name: 'Hans',
-    todo: ['Carry out the trash', 'Drink vodka', 'Smash gf']
-  }, 
-  {
-    age: 21,
-    name: 'Gobbel',
-    todo: ['Carry out the trash', 'Drink vodka', 'Smash gf']
-  }];
-  console.table(data2); */
-
-
-  //Group people in the object according to age
-
- /*  const people = [
-    { name: 'Ken', age: 25 },
-    { name: 'Kendra', age: 35 },
-    { name: 'Kerry', age: 35 },
-    { name: 'Charles', age: 25 },
-    { name: 'Sandra', age: 35 }
-  ];
-
-  const sorted = people.reduce((group, person) => {
-    const age = person.age;
-    if(group[age] == null) {
-      group[age] = [];
-    }
-      group[age].push(person); //If we dont have a group already, we start a new array of people of that age group
-      return group;
-   
-  }, {});
-  console.log(sorted);
- */
 
   const database = 'https://majazocom.github.io/Data/attendees.json';
  
