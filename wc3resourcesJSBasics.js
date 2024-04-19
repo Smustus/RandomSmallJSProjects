@@ -2066,53 +2066,6 @@
   console.log(becomeSingleDigit(777)); //2  
   console.log(becomeSingleDigit(123)); //1
   //------------------------------------------------------------------------------------------------
-  /* function sumOfDigits(num) {
-    let stored = num.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
-    console.log(num.toString().split(''));
-    console.log(stored);
-    return stored;
-  }
-  
-  function findReplacementCount(num) {
-    if (num < 10) {
-      return 0; // If the number is already a single-digit number
-    }
-    
-    let count = 0;
-    while (num >= 10) {
-      num = sumOfDigits(num);
-      count++;
-    }
-    return count;
-  }
-  
-  function main(number) {
-    const inputNumber = parseInt(number);
-    console.log(inputNumber)
-  
-    if (isNaN(inputNumber)) {
-      console.log("Invalid input. Please enter a valid number.");
-      return;
-    }
-  
-    const replacementCount = findReplacementCount(inputNumber);
-    console.log(`Number of replacements: ${replacementCount}`);
-  }
-  main('125345'); */
-  
-  /* const numbers = [1, 2, 3, 4, 5];
-  
-  function sumnum(array) {
-    return array.reduce((accum, currValue) => {
-      return accum + currValue;
-    }, 1);
-  }
-  console.log(sumnum(numbers)); // Output: 16 
-  
-  const sumer = numbers.reduce((accumulator, currentValue) => {
-    return accumulator + currentValue;
-  }, 0);
-  console.log(sumer); // Output: 15 */
   
   //106. Write a JavaScript program to divide an integer by another integer as long as the result is an integer and return the result. 
   
@@ -2863,24 +2816,6 @@
     const url = "https://www.w3resource.com/javascript-exercises/";
     console.log(breakURLIntoParts(url));
   
-   /*  function breakURL(url){
-      let data = url.split("://");
-      console.log(data); //[ "https", "www.w3resource.com/javascript-exercises/" ]
-      const protocol = data[0];
-      data = data[1].split(".com"); 
-      console.log(data); //[ "www.w3resource", "/javascript-exercises/" ]
-      const domain = data[0];
-      data = data[1].split("/");
-      console.log(data); //[ "", "javascript-exercises", "" ]
-  
-      if(data[1]){
-          return [protocol,domain,data[1]]
-      }
-  
-      return [protocol,domain]
-    }
-    console.log(breakURL('https://www.w3resource.com/javascript-exercises/')); //["https","www.w3resource","javascript-exercises"]
-    */
     console.log('--------------------'); 
   
   
@@ -3025,7 +2960,7 @@
     async function genHTML(data){
       const dataObj = await getData(data);
       console.log(dataObj);
-      const genElements = dataObj.map(function(obj) {
+      dataObj.map(function(obj) {
         if(obj.attending && obj.allergies.length){
           return new GenElement('p', [obj.name + ': ' + obj.allergies]);
         }
